@@ -1,0 +1,8 @@
+[
+    {"category":"Mythology","type":"multiple","difficulty":"easy","question":"The ancient Roman god of war was commonly known as which of the following?","correct_answer":"Mars","incorrect_answers":["Jupiter","Juno","Ares"]},
+    {"category":"Politics","type":"multiple","difficulty":"medium","question":"Before 2011, &quot;True Capitalist Radio&quot; was known by a different name. What was that name?","correct_answer":"True Conservative Radio","incorrect_answers":["True Republican Radio","Texan Capitalist Radio","United Capitalists"]},
+    {"category":"Entertainment: Music","type":"multiple","difficulty":"easy","question":"What was the subject of the 2014 song &quot;CoCo&quot; by American rapper O. T. Genasis?","correct_answer":"Cocaine","incorrect_answers":["Conan O&#039;Brien","Cobalt(II) carbonate","Coconut cream pie"]},
+    {"category":"Entertainment: Video Games","type":"multiple","difficulty":"medium","question":"In vanilla Minecraft, you can make armor out of all BUT which of the following?","correct_answer":"Emeralds","incorrect_answers":["Diamonds","Iron","Leather"]},
+    {"category":"Entertainment: Japanese Anime & Manga","type":"multiple","difficulty":"easy","question":"What caused the titular mascot of Yo-Kai Watch, Jibanyan, to become a yokai?","correct_answer":"Being run over by a truck","incorrect_answers":["Ate one too many chocobars","Through a magical ritual","When he put on the harmaki"]}
+    
+]
