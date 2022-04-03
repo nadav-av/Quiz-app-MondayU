@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 var he = require("he");
 
 const QuizQuestion = (props) => {
@@ -8,19 +8,19 @@ const QuizQuestion = (props) => {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [options, setOptions] = useState(question.incorrect_answers);
 
-  const arrangeAnswers = () => {
+  const arrangeAnswers = useCallback(() => {
     const answers = [...question.incorrect_answers];
     const correctAnswer = question.correct_answer;
     const randomIndex = getRandomInt(0, 3);
     answers.splice(randomIndex, 0, correctAnswer);
     setOptions(answers);
-  };
+  }, [question.incorrect_answers, question.correct_answer]);
 
-  const goToNextQuestion = () => {
+  const goToNextQuestion = useCallback(() => {
     setAnswer(selectedAnswer);
     clearInterval(timer.current);
     progressBar.current.classList.remove("active");
-  };
+  }, [selectedAnswer, setAnswer]);
 
   useEffect(() => {
     arrangeAnswers();
@@ -31,7 +31,7 @@ const QuizQuestion = (props) => {
     return () => {
       clearInterval(timer.current);
     };
-  }, [question]);
+  }, [arrangeAnswers, goToNextQuestion]);
 
   return (
     <div className="question">

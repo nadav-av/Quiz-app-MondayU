@@ -22,7 +22,7 @@ const SettingsForm = (props) => {
   return (
     <form>
       <div className="form-group">
-        <label for="Select">Select Category</label>
+        <label htmlFor="Select">Select Category</label>
         <select
           id="Select"
           className="form-control"
@@ -35,7 +35,7 @@ const SettingsForm = (props) => {
         </select>
       </div>
       <div className="form-group">
-        <label for="Select">Select Difficulty</label>
+        <label htmlFor="Select">Select Difficulty</label>
         <select
           id="Select"
           className="form-control"

@@ -15,9 +15,7 @@ const QuizScreen = (props) => {
   const { category, difficulty } = props;
 
   useEffect(() => {
-    console.log(category, difficulty);
     const catNum = Categories.find((cat) => cat.name === category).id;
-    console.log("DEBUG: ", catNum);
     const fetchQuestions = async () => {
       try {
         const response = await axios.get(
@@ -30,7 +28,7 @@ const QuizScreen = (props) => {
       }
     };
     fetchQuestions();
-  }, []);
+  }, [category, difficulty]);
 
   if (isLoading) {
     return (
