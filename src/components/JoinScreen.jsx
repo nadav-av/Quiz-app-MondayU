@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import SettingsModal from "./SettingsModal";
 
 const JoinScreen = (props) => {
-  const { start } = props;
+  const { start, catChange, difChange} = props;
   const [show, setShow] = useState(false);
+
 
   return (
     <div className="join-screen">
@@ -13,7 +14,13 @@ const JoinScreen = (props) => {
       <button className="open-Settings" onClick={() => setShow(true)}>
         Settings
       </button>
-      {show && <SettingsModal showModal={setShow} />}
+      {show && (
+        <SettingsModal
+          showModal={setShow}
+          catChange={catChange}
+          difChange={difChange}
+        />
+      )}
     </div>
   );
 };

@@ -3,11 +3,18 @@ import "./SettingsModal.css";
 import SettingsForm from "./SettingsForm";
 
 const SettingsModal = (props) => {
+  const { showModal, catChange, difChange } = props;
+
+  const handleSave = (category, difficulty) => {
+    catChange(category);
+    difChange(difficulty);
+  };
+
   return (
     <div className="modal-background">
       <div className="modal-container">
         <div className="close-btn">
-          <button className="close-btn" onClick={() => props.showModal(false)}>
+          <button className="close-btn" onClick={() => showModal(false)}>
             X
           </button>
         </div>
@@ -16,10 +23,10 @@ const SettingsModal = (props) => {
           <h2>Settings</h2>
         </div>
         <div className="modal-content">
-          <SettingsForm></SettingsForm>
-        </div>
-        <div className="modal-footer">
-          <button onClick={() => props.showModal(false)}>Save</button>
+          <SettingsForm
+            handleSave={handleSave}
+            showModal={showModal}
+          ></SettingsForm>
         </div>
       </div>
     </div>

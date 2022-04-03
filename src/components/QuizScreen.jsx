@@ -3,6 +3,7 @@ import QuizQuestion from "./QuizQuestion.jsx";
 import QuizResult from "./QuizResult.jsx";
 import axios from "axios";
 import HashLoader from "react-spinners/HashLoader";
+import Categories from "../data/categories.json";
 
 const QuizScreen = (props) => {
   const [QuestionList, setQuestionList] = useState([]);
@@ -11,16 +12,19 @@ const QuizScreen = (props) => {
     new Array(QuestionList.length)
   );
   const [isLoading, setIsLoading] = useState(true);
+  const { category, difficulty } = props;
 
   useEffect(() => {
+    console.log(category, difficulty);
+    const catNum = Categories.find((cat) => cat.name === category).id;
+    console.log("DEBUG: ", catNum);
     const fetchQuestions = async () => {
       try {
         const response = await axios.get(
-          "https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple"
+          `https://opentdb.com/api.php?amount=10&category=${catNum}&difficulty=${difficulty.toLowerCase()}`
         );
         setQuestionList(response.data.results);
         setIsLoading(false);
-        console.log(response.data.results);
       } catch (error) {
         console.log(error);
       }
