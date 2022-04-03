@@ -1,10 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-
-function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
-}
+var he = require("he");
 
 const QuizQuestion = (props) => {
   const { question, totalQuestions, currentQuestion, setAnswer } = props;
@@ -50,7 +45,7 @@ const QuizQuestion = (props) => {
       <div className="main">
         <div className="question-text">
           <span>Question:</span>
-          <p>{question.question}</p>
+          <p>{he.decode(question.question)}</p>
         </div>
 
         <div className="options">
@@ -65,7 +60,7 @@ const QuizQuestion = (props) => {
                 }
                 key={option}
               >
-                {option}
+                {he.decode(option)}
               </div>
             );
           })}
@@ -81,3 +76,9 @@ const QuizQuestion = (props) => {
 };
 
 export default QuizQuestion;
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+}

@@ -1,5 +1,6 @@
 import React from "react";
 import "./SettingsModal.css";
+import SettingsForm from "./SettingsForm";
 
 const SettingsModal = (props) => {
   return (
@@ -15,10 +16,7 @@ const SettingsModal = (props) => {
           <h2>Settings</h2>
         </div>
         <div className="modal-content">
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
-            quia!
-          </p>
+          <SettingsForm></SettingsForm>
         </div>
         <div className="modal-footer">
           <button onClick={() => props.showModal(false)}>Save</button>

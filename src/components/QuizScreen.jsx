@@ -1,13 +1,31 @@
-import React, { useState } from "react";
-import QuestionList from "../data/questions.json";
+import React, { useState, useEffect } from "react";
 import QuizQuestion from "./QuizQuestion.jsx";
 import QuizResult from "./QuizResult.jsx";
+import axios from "axios";
 
 const QuizScreen = (props) => {
+  const [QuestionList, setQuestionList] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [markedAnswer, setMarkedAnswer] = useState(
     new Array(QuestionList.length)
   );
+
+
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      try {
+        const response = await axios.get(
+          "https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple"
+        );
+        setQuestionList(response.data.results);
+        console.log(response.data.results);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchQuestions();
+  }, []);
+
   const isQuestionEnd = currentQuestionIndex === QuestionList.length;
   const { retry } = props;
 
