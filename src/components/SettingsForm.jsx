@@ -24,8 +24,8 @@ const SettingsForm = (props) => {
       <div className="form-group">
         <label htmlFor="Select">Select Category</label>
         <select
-          id="Select"
-          className="form-control"
+          className="form-select"
+          aria-label="Default select example"
           onChange={(e) => handleCategoryChange(e)}
         >
           <option>General Knowledge</option>
@@ -37,8 +37,8 @@ const SettingsForm = (props) => {
       <div className="form-group">
         <label htmlFor="Select">Select Difficulty</label>
         <select
-          id="Select"
-          className="form-control"
+          className="form-select"
+          aria-label="Default select example"
           onChange={(e) => handleDifficultyChange(e)}
         >
           <option>Easy</option>
@@ -47,7 +47,12 @@ const SettingsForm = (props) => {
         </select>
       </div>
       <div className="modal-footer">
-        <button onClick={() => handleSubmit(category, difficulty)}>Save</button>
+        <button
+          type="button"
+          onClick={() => handleSubmit(category, difficulty)}
+        >
+          Save
+        </button>
       </div>
     </form>
   );
