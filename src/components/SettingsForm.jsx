@@ -25,16 +25,16 @@ const SettingsForm = (props) => {
     setTimer(e.target.value);
   };
 
-  const handleSubmit = (category, difficulty, life, timer) => {
-    handleSave(category, difficulty, life, timer);
+  const handleSubmit = (category, difficulty, life, timer, user) => {
+    handleSave(category, difficulty, life, timer, user);
     showModal(false);
   };
 
   const getCurrentCategory = () => {
-    const currentCategoryNumber = parseInt(
+    const currentCatName = parseInt(
       JSON.parse(localStorage.getItem("currentCategory"))
     );
-    const res = categories.find((item) => item.id === currentCategoryNumber);
+    const res = categories.find((item) => item.id === currentCatName);
     return res.name;
   };
 
@@ -46,7 +46,7 @@ const SettingsForm = (props) => {
           className="form-select"
           aria-label="Default select example"
           onChange={(e) => handleCategoryChange(e)}
-          defaultValue={getCurrentCategory()}
+          value={getCurrentCategory()}
         >
           {categories.map((category) => {
             return (

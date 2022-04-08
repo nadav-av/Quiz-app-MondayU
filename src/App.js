@@ -6,7 +6,7 @@ import JoinScreen from "./components/JoinScreen";
 const Default_Category = 9; //General Knowledge
 const Default_Difficulty = "Easy";
 const Default_Life = 3;
-const Defauly_Timer = 10;
+const Default_Timer = 10;
 
 const App = () => {
   const [isQuizstarted, setIsQuizStarted] = useState(false);
@@ -14,10 +14,11 @@ const App = () => {
   const [currentDifficulty, setCurrentDifficulty] =
     useState(Default_Difficulty);
   const [currentLife, setCurrentLife] = useState(Default_Life);
-  const [currentTimer, setCurrentTimer] = useState(Defauly_Timer);
+  const [currentTimer, setCurrentTimer] = useState(Default_Timer);
 
   const handleCategoryChange = (value) => {
     setCurrentCategory(value);
+    
   };
 
   const handleDifficultyChange = (value) => {
@@ -31,6 +32,7 @@ const App = () => {
   const handleTimerChange = (value) => {
     setCurrentTimer(value);
   };
+
 
   useEffect(() => {
     localStorage.setItem("currentCategory", JSON.stringify(currentCategory));

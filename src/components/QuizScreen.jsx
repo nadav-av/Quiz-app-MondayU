@@ -4,15 +4,21 @@ import QuizResult from "./QuizResult.jsx";
 import axios from "axios";
 import HashLoader from "react-spinners/HashLoader";
 import Lifes from "./Lifes.jsx";
-import DifficultMapping from "../data/difficultMapping.json";
 
 const QuizScreen = (props) => {
-  const [QuestionList, setQuestionList] = useState([]);
+  const [questionList, setQuestionList] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-  const { category, difficulty, MaxMistakes, timePerQuestion } = props;
+  const {
+    retry,
+    category,
+    difficulty,
+    MaxMistakes: maxMistakes,
+    timePerQuestion,
+  } = props;
   const [isAlive, setIsAlive] = useState(3);
   const [correctAnswers, setCorrectAnswers] = useState(0);
+  const isQuestionEnd = currentQuestionIndex === questionList.length;
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -21,14 +27,14 @@ const QuizScreen = (props) => {
           `https://opentdb.com/api.php?amount=10&category=${category}&difficulty=${difficulty.toLowerCase()}`
         );
         setQuestionList(response.data.results);
-        setIsAlive(MaxMistakes);
+        setIsAlive(maxMistakes);
         setIsLoading(false);
       } catch (error) {
         console.log(error);
       }
     };
     fetchQuestions();
-  }, [category, difficulty, MaxMistakes]);
+  }, [category, difficulty, maxMistakes]);
 
   if (isLoading) {
     return (
@@ -42,46 +48,26 @@ const QuizScreen = (props) => {
       </div>
     );
   }
-  const isQuestionEnd = currentQuestionIndex === QuestionList.length;
-  const { retry } = props;
-
-  const getDifficultMult = () => {
-    const res = DifficultMapping.find((item) => item.Difficulty === difficulty);
-    return res.ScoreMult;
-  };
-
-  const calculateResult = () => {
-    const mult = getDifficultMult();
-    const div = parseInt(MaxMistakes);
-    const _precentage = Math.trunc(
-      (correctAnswers / QuestionList.length) * 100
-    );
-
-    console.log(mult, _precentage, div, timePerQuestion, isAlive);
-    let _score = Math.trunc((mult * _precentage) / (div + timePerQuestion));
-    if (isAlive !== 0) {
-      _score *= isAlive;
-    }
-
-    return {
-      correct: correctAnswers,
-      total: QuestionList.length,
-      precentage: _precentage,
-      score: _score,
-    };
-  };
 
   return (
     <div className="quiz-screen">
       {isQuestionEnd || isAlive < 1 ? (
-        <QuizResult result={calculateResult()} retry={retry} />
+        <QuizResult
+          difficulty={difficulty}
+          maxMistakes={maxMistakes}
+          correctAnswers={correctAnswers}
+          qstLength={questionList.length}
+          lifes={isAlive}
+          time={timePerQuestion}
+          retry={retry}
+        />
       ) : (
         <React.Fragment>
           <Lifes howManyLeft={isAlive} />
           <QuizQuestion
-            question={QuestionList[currentQuestionIndex]}
-            correctAnswer={QuestionList[currentQuestionIndex].correct_answer}
-            totalQuestions={QuestionList.length}
+            question={questionList[currentQuestionIndex]}
+            correctAnswer={questionList[currentQuestionIndex].correct_answer}
+            totalQuestions={questionList.length}
             currentQuestion={currentQuestionIndex}
             timePerQuestion={timePerQuestion}
             setAnswer={(isCorrect) => {

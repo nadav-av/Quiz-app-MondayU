@@ -38,7 +38,6 @@ const QuizQuestion = (props) => {
   );
 
   const goToNextQuestion = () => {
-    console.log(correctAnswer, selectedAnswer);
     setAnswer(correctAnswer === selectedAnswer);
     clearInterval(timer.current);
     if (progressBar.current) {
