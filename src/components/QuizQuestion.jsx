@@ -2,12 +2,19 @@ import React, { useEffect, useRef, useState, useCallback } from "react";
 var he = require("he");
 
 const QuizQuestion = (props) => {
-  const { question, totalQuestions, currentQuestion, setAnswer } = props;
+  const {
+    question,
+    correctAnswer,
+    totalQuestions,
+    currentQuestion,
+    timePerQuestion,
+    setAnswer,
+  } = props;
+
   const timer = useRef(null);
   const progressBar = useRef(null);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [options, setOptions] = useState(question.incorrect_answers);
-
   const arrangeAnswers = () => {
     const answers = [...question.incorrect_answers];
     const correctAnswer = question.correct_answer;
@@ -16,18 +23,38 @@ const QuizQuestion = (props) => {
     setOptions(answers);
   };
 
+  const setTimer = useCallback(
+    (ref) => {
+      progressBar.current = ref;
+      if (progressBar.current) {
+        if (timePerQuestion === "20") {
+          progressBar.current.classList.add("twenty");
+        } else if (timePerQuestion === "30") {
+          progressBar.current.classList.add("thirty");
+        }
+      }
+    },
+    [timePerQuestion]
+  );
+
   const goToNextQuestion = () => {
-    setAnswer(selectedAnswer);
+    console.log(correctAnswer, selectedAnswer);
+    setAnswer(correctAnswer === selectedAnswer);
     clearInterval(timer.current);
-    progressBar.current.classList.remove("active");
+    if (progressBar.current) {
+      progressBar.current.classList.remove("active");
+    }
   };
 
   useEffect(() => {
     arrangeAnswers();
+    setSelectedAnswer(null);
     setTimeout(() => {
-      progressBar.current.classList.add("active");
+      if (progressBar.current) {
+        progressBar.current.classList.add("active");
+      }
     }, 0);
-    timer.current = setTimeout(goToNextQuestion, 10 * 1000);
+    timer.current = setTimeout(goToNextQuestion, timePerQuestion * 1000);
     return () => {
       clearInterval(timer.current);
     };
@@ -35,9 +62,9 @@ const QuizQuestion = (props) => {
 
   return (
     <div className="question">
-      <div className="progress-bar" ref={progressBar}></div>
+      <div className="progress-bar" ref={setTimer}></div>
       <div className="question-count">
-        <b>{currentQuestion + " "}</b>
+        <b>{currentQuestion + 1 + " "}</b>
         of
         <b>{" " + totalQuestions}</b>
       </div>
@@ -67,7 +94,12 @@ const QuizQuestion = (props) => {
         </div>
       </div>
       <div className="control">
-        <button className="btn-next" onClick={goToNextQuestion}>
+        <button
+          type="button"
+          className="btn btn-primary btn-lg w-100"
+          id="next-btn"
+          onClick={goToNextQuestion}
+        >
           Next
         </button>
       </div>

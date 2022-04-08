@@ -2,23 +2,33 @@ import React, { useState } from "react";
 import SettingsModal from "./SettingsModal";
 
 const JoinScreen = (props) => {
-  const { start, catChange, difChange} = props;
-  const [show, setShow] = useState(false);
-
+  const { start, catChange, difChange, lifeChange, timerChange } = props;
+  const [settingsModalShow, setSettingsModalShow] = useState(false);
 
   return (
     <div className="join-screen">
-      <h2>Join Quiz</h2>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-      <button onClick={start}>Start</button>
-      <button className="open-Settings" onClick={() => setShow(true)}>
+      <h2>AnyQuiz</h2>
+      <p>
+        Go to the setting, choose your category and difficulty level, and start
+        playing!
+      </p>
+      <button type="button" className="btn btn-outline-primary" onClick={start}>
+        Start
+      </button>
+      <button
+        type="button"
+        className="btn btn-outline-secondary"
+        onClick={() => setSettingsModalShow(true)}
+      >
         Settings
       </button>
-      {show && (
+      {settingsModalShow && (
         <SettingsModal
-          showModal={setShow}
+          showModal={setSettingsModalShow}
           catChange={catChange}
           difChange={difChange}
+          lifeChange={lifeChange}
+          timerChange={timerChange}
         />
       )}
     </div>

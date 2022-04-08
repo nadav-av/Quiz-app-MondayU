@@ -1,14 +1,17 @@
 import React from "react";
 
 const QuizResult = (props) => {
-  const { score, retry } = props;
+  const { result, retry } = props;
   return (
     <div className="result-screen">
-      <h2>Result: {score.precentage}%</h2>
+      <h2>Result: {result.precentage}%</h2>
       <p>
-        You got {score.correct} out of {score.total} questions
+        You got {result.correct} out of {result.total} questions
       </p>
-      <button onClick={retry}>Retry</button>
+      <p>You got {result.score} points</p>
+      <button type="button" className="btn btn-outline-dark" onClick={retry}>
+        Try Again
+      </button>
     </div>
   );
 };

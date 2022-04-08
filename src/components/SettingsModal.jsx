@@ -3,11 +3,13 @@ import "./SettingsModal.css";
 import SettingsForm from "./SettingsForm";
 
 const SettingsModal = (props) => {
-  const { showModal, catChange, difChange } = props;
+  const { showModal, catChange, difChange, lifeChange, timerChange } = props;
 
-  const handleSave = (category, difficulty) => {
+  const handleSave = (category, difficulty, life, timer) => {
     catChange(category);
     difChange(difficulty);
+    lifeChange(life);
+    timerChange(timer);
   };
 
   return (
