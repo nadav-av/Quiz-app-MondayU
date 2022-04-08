@@ -30,6 +30,14 @@ const SettingsForm = (props) => {
     showModal(false);
   };
 
+  const getCurrentCategory = () => {
+    const currentCategoryNumber = parseInt(
+      JSON.parse(localStorage.getItem("currentCategory"))
+    );
+    const res = categories.find((item) => item.id === currentCategoryNumber);
+    return res.name;
+  };
+
   return (
     <form>
       <div className="form-group">
@@ -38,6 +46,7 @@ const SettingsForm = (props) => {
           className="form-select"
           aria-label="Default select example"
           onChange={(e) => handleCategoryChange(e)}
+          defaultValue={getCurrentCategory()}
         >
           {categories.map((category) => {
             return (
@@ -55,6 +64,7 @@ const SettingsForm = (props) => {
           className="form-select"
           aria-label="Default select example"
           onChange={(e) => handleDifficultyChange(e)}
+          defaultValue={JSON.parse(localStorage.getItem("currentDifficulty"))}
         >
           <option>Easy</option>
           <option>Medium</option>
@@ -68,6 +78,7 @@ const SettingsForm = (props) => {
           className="form-select"
           aria-label="Default select example"
           onChange={(e) => handleLifeChange(e)}
+          defaultValue={JSON.parse(localStorage.getItem("currentLife"))}
         >
           <option>1</option>
           <option>2</option>
@@ -82,6 +93,7 @@ const SettingsForm = (props) => {
           className="form-select"
           aria-label="Default select example"
           onChange={(e) => handleTimerChange(e)}
+          defaultValue={JSON.parse(localStorage.getItem("currentTimer"))}
         >
           <option>10</option>
           <option>20</option>

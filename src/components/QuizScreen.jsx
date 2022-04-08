@@ -5,7 +5,6 @@ import axios from "axios";
 import HashLoader from "react-spinners/HashLoader";
 import Lifes from "./Lifes.jsx";
 import DifficultMapping from "../data/difficultMapping.json";
-import { faMultiply } from "@fortawesome/free-solid-svg-icons";
 
 const QuizScreen = (props) => {
   const [QuestionList, setQuestionList] = useState([]);

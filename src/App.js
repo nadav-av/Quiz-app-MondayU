@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import QuizScreen from "./components/QuizScreen";
 import JoinScreen from "./components/JoinScreen";
 
@@ -17,24 +17,30 @@ const App = () => {
   const [currentTimer, setCurrentTimer] = useState(Defauly_Timer);
 
   const handleCategoryChange = (value) => {
-    console.log(value);
     setCurrentCategory(value);
   };
 
   const handleDifficultyChange = (value) => {
-    console.log(value);
     setCurrentDifficulty(value);
   };
 
   const handleLifeChange = (value) => {
-    console.log(value);
     setCurrentLife(value);
   };
 
   const handleTimerChange = (value) => {
-    console.log(value);
     setCurrentTimer(value);
   };
+
+  useEffect(() => {
+    localStorage.setItem("currentCategory", JSON.stringify(currentCategory));
+    localStorage.setItem(
+      "currentDifficulty",
+      JSON.stringify(currentDifficulty)
+    );
+    localStorage.setItem("currentLife", JSON.stringify(currentLife));
+    localStorage.setItem("currentTimer", JSON.stringify(currentTimer));
+  }, [currentCategory, currentDifficulty, currentLife, currentTimer]);
 
   return (
     <React.Fragment>
