@@ -46,7 +46,6 @@ const SettingsForm = (props) => {
           className="form-select"
           aria-label="Default select example"
           onChange={(e) => handleCategoryChange(e)}
-          value={getCurrentCategory()}
         >
           {categories.map((category) => {
             return (
