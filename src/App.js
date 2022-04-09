@@ -18,7 +18,6 @@ const App = () => {
 
   const handleCategoryChange = (value) => {
     setCurrentCategory(value);
-    
   };
 
   const handleDifficultyChange = (value) => {
@@ -32,7 +31,6 @@ const App = () => {
   const handleTimerChange = (value) => {
     setCurrentTimer(value);
   };
-
 
   useEffect(() => {
     localStorage.setItem("currentCategory", JSON.stringify(currentCategory));
@@ -64,6 +62,15 @@ const App = () => {
             timerChange={handleTimerChange}
           />
         )}
+      </div>
+      <div className="footer">
+        <p>
+          Made with{" "}
+          <span role="img" aria-label="heart">
+            ❤️
+          </span>{" "}
+          by{" Nadav Avraham "}
+        </p>
       </div>
     </React.Fragment>
   );
