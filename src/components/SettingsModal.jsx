@@ -15,7 +15,7 @@ const SettingsModal = (props) => {
   return (
     <div className="modal-background">
       <div className="modal-container">
-        <div className="close-btn">
+        <div className="close-btn"> 
           <button className="close-btn" onClick={() => showModal(false)}>
             X
           </button>
